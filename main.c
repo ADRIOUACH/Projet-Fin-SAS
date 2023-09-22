@@ -11,28 +11,39 @@ struct Tache {
  };
 void ajouter(){
     struct Tache nevelltach;
-    printf("entre une titre:");
+    printf("entre une id:\n");
+    scanf("%d",nevelltach.id);
+    printf("entre une titre:\n");
     scanf("%s",nevelltach.titre);
-    printf("entre une description:");
+    printf("entre une description:\n");
     scanf("%s",nevelltach.description);
-    printf("entre la date limite de la tache (JJ/MM/AAAA):");
+    printf("entre la date limite de la tache (JJ/MM/AAAA):\n");
     scanf("%s",nevelltach.deadline);
-    printf("entre une statu(realiser,en cours de realisation,finalisee):");
+    printf("entre une statu(realiser,en cours de realisation,finalisee):\n");
     scanf("%s",nevelltach.statu);
     printf("Tache ajoutée avec succes\n");
 
 
 }
+void ajouterples(){
 
+    int i;
+     ajouter();
+    printf("Combien de taches souhaitez vous ajouter\n");
+    scanf("%d",i);
+    for(i=0;i<400;i++){
+
+    }
+    }
 int main() {
     struct Tache listeTaches[100];
     int choix;
     do{
-    printf("Menu\n");
-    printf("1: Ajouter une nouvelle tache.  \n");
+    printf("~~~~~~~~~~~~~~~~~~~~~~Menu~~~~~~~~~~~~~~~~~~~~~~~\n");
+    printf("1: Ajouter une nouvelle tache.\n");
     printf("2: Ajouter plusieurs nouvelles taches.\n");
-    printf("3: Afficher la liste de toutes les taches. \n");
-    printf("4: Modifier une tache \n");
+    printf("3: Afficher la liste de toutes les taches.\n");
+    printf("4: Modifier une tache\n");
     printf("5: Supprimer une tache par identifiant.\n");
     printf("6: Rechercher les Taches.\n");
     printf("7: Statistiques.\n");
@@ -47,7 +58,7 @@ int main() {
         break;
     case 2:
         printf("votre choix et 2\n");
-
+ajouterples();
         break;
     case 3:
         printf("votre choix et 3\n");
@@ -61,21 +72,12 @@ int main() {
         printf("votre choix inccorect");
 
     }
-    }while(choix!=4);
+
+    }while(choix!=7);
+
     return 0;
 }
 
 
 
 
-void menu (){
-    printf("Menu\n");
-    printf("1: Ajouter une nouvelle tache.  \n");
-    printf("2: Ajouter plusieurs nouvelles taches.\n");
-    printf("3: Afficher la liste de toutes les taches. \n");
-    printf("4: Modifier une tache \n");
-    printf("5: Supprimer une tache par identifiant.\n");
-    printf("6: Rechercher les Taches.\n");
-    printf("7: Statistiques.\n");
-    printf("entre un choix:\n");
-}
