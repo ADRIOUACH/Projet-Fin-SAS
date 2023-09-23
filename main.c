@@ -33,11 +33,24 @@ void modifierTache(Tache *listeTaches, int nombreTaches, int id) {
             scanf(" %s", listeTaches[i].description);
             printf("Nouveau deadline  : ");
             scanf(" %s", listeTaches[i].deadline );
-            printf("Tâche modifiée avec succès.\n");
-            return;
+            printf("Tache modifiée avec succes.\n");
+
         }
     }
-    printf("Aucune tâche avec cet ID n'a été trouvée.\n");
+    printf("Aucune tâche avec cet id n'a ete trouvee.\n");
+}
+void supprimerTache(Tache *listeTaches, int *nombreTaches, int id) {
+    for (int i = 0; i < *nombreTaches; i++) {
+        if (listeTaches[i].id == id) {
+            for (int j = i; j < *nombreTaches - 1; j++) {
+                listeTaches[j] = listeTaches[j + 1];
+            }
+            (*nombreTaches)--;
+            printf("Tache avec id %d a ete supprimee avec succes.\n", id);
+
+        }
+    }
+    printf("Aucune tache avec cet id n'a ete trouvee.\n");
 }
 
 int main() {
@@ -92,7 +105,11 @@ int main() {
         break;
 
       case 4:
-                printf("Votre choix est 4\n");
+         printf("Votre choix est 4\n");
+         int Supprimerid;
+         printf("Entre id de la tache a supprimer : ");
+         scanf("%d", &Supprimerid);
+         supprimerTache(listeTaches, &nombreTaches, Supprimerid);
 
         break;
 
