@@ -1,86 +1,121 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <time.h>
-struct Tache {
-    char id[100];
-    char titre[100];
-    char description[100];
+
+typedef struct {
+    int id;
+    char titre[50];
+    char description[30];
     char deadline[100];
-    char statu[100];
+    char statu[40];
 
- };
-void ajouter(){
-    struct Tache nevelltach;
-    printf("entre une id:\n");
-    scanf("%s",nevelltach.id);
-    printf("entre une titre:\n");
-    scanf("%s",nevelltach.titre);
-    printf("entre une description:\n");
-    scanf("%s",nevelltach.description);
-    printf("entre la date limite de la tache (JJ/MM/AAAA):\n");
-    scanf("%s",nevelltach.deadline);
-    printf("entre une statu(realiser,en cours de realisation,finalisee):\n");
-    scanf("%s",nevelltach.statu);
-    printf("Tache ajoutée avec succes\n");
-
-
+ }Tache;
+void ajouter(Tache *tache) {
+    printf("entre le id: ");
+    scanf(" %d", &tache->id);
+    printf("entre le titre : ");
+    scanf(" %s", tache->titre);
+    printf("entre la description : ");
+    scanf(" %s", tache->description);
+    printf("entre la date limite (JJ/MM/AAAA) : ");
+    scanf(" %s", tache->deadline);
+    printf("entre le statut (realiser/en cours/finalisee): ");
+    scanf(" %s", tache->statu);
+    printf("Tache ajoutée avec succès .\n");
+}
+void modifierTache(Tache *listeTaches, int nombreTaches, int id) {
+    for (int i = 0; i < nombreTaches; i++) {
+        if (listeTaches[i].id == id) {
+            printf("Modifier la tache %d :\n", id);
+            printf("Nouveau titre : ");
+            scanf(" %s", listeTaches[i].titre);
+            printf("Nouvelle description : ");
+            scanf(" %s", listeTaches[i].description);
+            printf("Nouveau deadline  : ");
+            scanf(" %s", listeTaches[i].deadline );
+            printf("Tâche modifiée avec succès.\n");
+            return;
+        }
+    }
+    printf("Aucune tâche avec cet ID n'a été trouvée.\n");
 }
 
-
 int main() {
-    struct Tache listeTaches[100];
-    int choix;
+    Tache listeTaches[100];
+    int choix, i;
     int nombreTaches = 0;
     do{
-    printf("~~~~~~~~~~~~~~~~~~~~~~Menu~~~~~~~~~~~~~~~~~~~~~~~\n");
-    printf("1: Ajouter une nouvelle tache.\n");
-    printf("2: Afficher la liste de toutes les taches.\n");
-    printf("3: Modifier une tache\n");
-    printf("4: Supprimer une tache par identifiant.\n");
-    printf("5: Rechercher les Taches.\n");
-    printf("6: Statistiques.\n");
-    printf("entre un choix:\n");
-    scanf("%d",&choix);
+      printf("~~~~~~~~~~~~~~~~~~~~~~Menu~~~~~~~~~~~~~~~~~~~~~~~\n");
+        printf("1: -----> Ajouter une nouvelle tache.\n");
+        printf("2: -----> Afficher la liste de toutes les taches.\n");
+        printf("3: -----> Modifier une tache\n");
+        printf("4: -----> Supprimer une tache par identifiant.\n");
+        printf("5: -----> Rechercher les Taches.\n");
+        printf("6: -----> Statistiques.\n");
+        printf("7: -----> Quitter.\n");
+        printf("entre un choix : ");
+        scanf("%d", &choix);
 
     switch(choix){
 
     case 1:
-         printf("votre choix est 1\n");
+        printf("votre choix est 1\n");
                 if (nombreTaches < 100) {
                     ajouter(&listeTaches[nombreTaches]);
                     nombreTaches++;
-                } else {
+                }else {
                     printf("La liste de taches est pleine.\n");
                 }
         break;
+
     case 2:
-        pprintf("votre choix est 2\n");
+
+        printf("votre choix est 2\n");
                 printf("Liste de toutes les taches :\n");
-                for (int i = 0; i < nombreTaches; i++) {
-                    printf("Tache %d :\n", i + 1);
-                    printf("ID : %s\n", listeTaches[i].id);
-                    printf("Titre : %s\n", listeTaches[i].titre);
-                    printf("Description : %s\n", listeTaches[i].description);
-                    printf("Date limite : %s\n", listeTaches[i].deadline);
-                    printf("Statu : %d\n", listeTaches[i].statu);
+                for (i = 0; i < nombreTaches; i++) {
+                    printf("-----> Tache %d :\n", i + 1);
+                    printf("-----> ID : %d\n", listeTaches[i].id);
+                    printf("-----> Titre : %s\n", listeTaches[i].titre);
+                    printf("-----> Description : %s \n", listeTaches[i].description);
+                    printf("-----> Date limite : %s \n", listeTaches[i].deadline);
+                    printf("-----> Statu : %s \n", listeTaches[i].statu);
+                }
+        break;
+
+     case 3:
+         printf("Votre choix est 3\n");
+         int Nouveauid;
+         printf("entre id de la tache a modifier : ");
+         scanf("%d", &Nouveauid);
+         modifierTache(listeTaches, nombreTaches, Nouveauid);
 
         break;
-    case 3:
-        printf("votre choix et 3\n");
+
+      case 4:
+                printf("Votre choix est 4\n");
 
         break;
-    case 4:
-        printf("votre choix et 4\n");
 
+      case 5:
+                printf("Votre choix est 5\n");
         break;
-    default:
-        printf("votre choix inccorect");
 
-    }
+      case 6:
+                printf("Votre choix est 6\n");
+        break;
 
-    }while(choix!=7);
+      case 7:
+                printf("ou revoir \n");
+        break;
+
+      default:
+                printf("Choix incorrect.\n");
+        }
+    } while (choix != 7);
+
 
     return 0;
+
 }
 
 
