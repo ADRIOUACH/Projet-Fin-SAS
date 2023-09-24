@@ -21,7 +21,7 @@ void ajouter(Tache *tache) {
     scanf(" %s", tache->deadline);
     printf("entre le statut (realiser/en cours/finalisee): ");
     scanf(" %s", tache->statu);
-    printf("Tache ajoutée avec succès .\n");
+    printf("Tache ajoutee avec succes .\n");
 }
 void modifierTache(Tache *listeTaches, int nombreTaches, int id) {
     for (int i = 0; i < nombreTaches; i++) {
@@ -37,7 +37,7 @@ void modifierTache(Tache *listeTaches, int nombreTaches, int id) {
 
         }
     }
-    printf("Aucune tâche avec cet id n'a ete trouvee.\n");
+    printf("Aucune tache avec cet id n'a ete trouvee.\n");
 }
 void supprimerTache(Tache *listeTaches, int *nombreTaches, int id) {
     for (int i = 0; i < *nombreTaches; i++) {
@@ -52,8 +52,54 @@ void supprimerTache(Tache *listeTaches, int *nombreTaches, int id) {
     }
     printf("Aucune tache avec cet id n'a ete trouvee.\n");
 }
+void rechercherTacheParID(Tache *listeTaches, int nombreTaches, int id) {
+    for (int i = 0; i < nombreTaches; i++) {
+        if (listeTaches[i].id == id) {
+            printf("Tache avec id %d :\n", id);
+            printf("-----> Titre : %s\n", listeTaches[i].titre);
+            printf("-----> Description : %s \n", listeTaches[i].description);
+            printf("-----> Date limite : %s \n", listeTaches[i].deadline);
+            printf("-----> Statut : %s \n", listeTaches[i].statu);
+            return;
+        }
+    }
+    printf("Aucune tache avec cet ID n'a ete trouvee.\n");
+}
+void rechercherTacheParTitre(Tache *listeTaches, int nombreTaches, const char *titre) {
+    for (int i = 0; i < nombreTaches; i++) {
+        if (strcmp(listeTaches[i].titre, titre) == 0) {
+            printf("Tache avec le Titre \"%s\" :\n", titre);
+            printf("-----> ID : %d\n", listeTaches[i].id);
+            printf("-----> Description : %s \n", listeTaches[i].description);
+            printf("-----> Date limite : %s \n", listeTaches[i].deadline);
+            printf("-----> Statut : %s \n", listeTaches[i].statu);
+            return;
+        }
+    }
+    printf("Aucune tache avec ce Titre n'a ete trouvee.\n");
+}
+void afficherStatistiques(Tache *listeTaches, int nombreTaches) {
+    int tachesCompletes = 0;
+    int tachesIncompletes = 0;
+
+    printf("Statistiques :\n");
+    printf("Nombre total de taches : %d\n", nombreTaches);
+
+    for (int i = 0; i < nombreTaches; i++) {
+        if (strcmp(listeTaches[i].statu, "realiser") == 0) {
+            tachesCompletes++;
+        } else {
+            tachesIncompletes++;
+        }
+    }
+
+    printf("Nombre de taches completes : %d\n", tachesCompletes);
+    printf("Nombre de taches incompletes : %d\n", tachesIncompletes);
+}
 
 int main() {
+  char rechercheTitre[50];
+    int rechercheID ;
     Tache listeTaches[100];
     int choix, i;
     int nombreTaches = 0;
@@ -86,7 +132,7 @@ int main() {
         printf("votre choix est 2\n");
                 printf("Liste de toutes les taches :\n");
                 for (i = 0; i < nombreTaches; i++) {
-                    printf("-----> Tache %d :\n", i + 1);
+                    printf(" Tache %d :\n", i + 1);
                     printf("-----> ID : %d\n", listeTaches[i].id);
                     printf("-----> Titre : %s\n", listeTaches[i].titre);
                     printf("-----> Description : %s \n", listeTaches[i].description);
@@ -96,11 +142,11 @@ int main() {
         break;
 
      case 3:
-         printf("Votre choix est 3\n");
-         int Nouveauid;
-         printf("entre id de la tache a modifier : ");
-         scanf("%d", &Nouveauid);
-         modifierTache(listeTaches, nombreTaches, Nouveauid);
+             printf("Votre choix est 3\n");
+             int Nouveauid;
+             printf("entre id de la tache a modifier : ");
+             scanf("%d", &Nouveauid);
+             modifierTache(listeTaches, nombreTaches, Nouveauid);
 
         break;
 
@@ -115,10 +161,37 @@ int main() {
 
       case 5:
                 printf("Votre choix est 5\n");
-        break;
+                int rechercheSousChoix;
+                printf("1: Rechercher par ID\n");
+                printf("2: Rechercher par Titre\n");
+                printf("Entre un choix : ");
+                scanf("%d", &rechercheSousChoix);
 
-      case 6:
-                printf("Votre choix est 6\n");
+                switch (rechercheSousChoix) {
+                    case 1:
+
+                        printf("Entrez id de la tache : ");
+                        scanf("%d", &rechercheID);
+                        rechercherTacheParID(listeTaches, nombreTaches, rechercheID);
+                        break;
+
+                    case 2:
+
+                        printf("Entrez le Titre de la tache : ");
+                        scanf(" %s", rechercheTitre);
+                        rechercherTacheParTitre(listeTaches, nombreTaches, rechercheTitre);
+                        break;
+
+                    default:
+                        printf("Choix incorrect pour la recherche.\n");
+                        break;
+                       }
+
+       case 6:
+
+        printf("Votre choix est 6\n");
+        afficherStatistiques(listeTaches, nombreTaches);
+
         break;
 
       case 7:
