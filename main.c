@@ -22,6 +22,7 @@ void ajouter(Tache *tache) {
     printf("entre le statut (realiser/en cours/finalisee): ");
     scanf(" %s", tache->statu);
     printf("Tache ajoutee avec succes .\n");
+
 }
 void modifierTache(Tache *listeTaches, int nombreTaches, int id) {
     for (int i = 0; i < nombreTaches; i++) {
@@ -60,10 +61,12 @@ void rechercherTacheParID(Tache *listeTaches, int nombreTaches, int id) {
             printf("-----> Description : %s \n", listeTaches[i].description);
             printf("-----> Date limite : %s \n", listeTaches[i].deadline);
             printf("-----> Statut : %s \n", listeTaches[i].statu);
-            return;
+
+        }else{
+            printf("Aucune tache avec cet ID n'a ete trouvee.\n");
+
         }
     }
-    printf("Aucune tache avec cet ID n'a ete trouvee.\n");
 }
 void rechercherTacheParTitre(Tache *listeTaches, int nombreTaches, const char *titre) {
     for (int i = 0; i < nombreTaches; i++) {
@@ -73,10 +76,12 @@ void rechercherTacheParTitre(Tache *listeTaches, int nombreTaches, const char *t
             printf("-----> Description : %s \n", listeTaches[i].description);
             printf("-----> Date limite : %s \n", listeTaches[i].deadline);
             printf("-----> Statut : %s \n", listeTaches[i].statu);
-            return;
+
+        }else{
+            printf("Aucune tache avec ce Titre n'a ete trouvee.\n");
+
         }
     }
-    printf("Aucune tache avec ce Titre n'a ete trouvee.\n");
 }
 void afficherStatistiques(Tache *listeTaches, int nombreTaches) {
     int tachesCompletes = 0;
@@ -184,8 +189,9 @@ int main() {
 
                     default:
                         printf("Choix incorrect pour la recherche.\n");
-                        break;
+
                        }
+                       break;
 
        case 6:
 
